@@ -21,4 +21,8 @@ public class GameService {
         Game result = gameRepository.findById(listId).get();
         return new GameDTO(result);
     }
+
+    public List<Game> findAll() {
+        return gameRepository.findAll();
+    }
 }
