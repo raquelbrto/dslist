@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class GameDTO {
+public class GameMinDTO {
 
     private Long id;
     private String title;
@@ -14,7 +14,7 @@ public class GameDTO {
     private String imgUrl;
     private String shortDescription;
 
-    public GameDTO(Game entity) {
+    public GameMinDTO(Game entity) {
         id = entity.getId();
         title = entity.getTitle();
         year = entity.getYear();

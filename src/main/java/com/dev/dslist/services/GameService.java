@@ -1,6 +1,6 @@
 package com.dev.dslist.services;
 
-import com.dev.dslist.dto.GameDTO;
+import com.dev.dslist.dto.GameMinDTO;
 import com.dev.dslist.entities.Game;
 import com.dev.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -17,12 +18,14 @@ public class GameService {
     private GameRepository gameRepository;
 
     @Transactional(readOnly = true)
-    public GameDTO findById(@PathVariable Long listId) {
+    public GameMinDTO findById(@PathVariable Long listId) {
         Game result = gameRepository.findById(listId).get();
-        return new GameDTO(result);
+        return new GameMinDTO(result);
     }
 
-    public List<Game> findAll() {
-        return gameRepository.findAll();
+    public List<GameMinDTO> findAll() {
+        List<Game> result = gameRepository.findAll();
+        List<GameMinDTO> gameMinDTO = result.stream().map(x -> new GameMinDTO(x)).collect(Collectors.toList());
+        return gameMinDTO;
     }
 }
