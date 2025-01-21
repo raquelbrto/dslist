@@ -40,3 +40,6 @@ jobs:
       # Step 5: Run tests
       - name: Run tests
         run: mvn test
+
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
